@@ -1,7 +1,7 @@
 ---
-- name: Dynamic web | Install and configure
+- name: Prometheus | Install and configure
   hosts: all
   become: true
 
   roles:
-    - { role: dynamicweb, when: ansible_system == 'Linux' }
+    - { role: prometheus, when: ansible_system == 'Linux' }
