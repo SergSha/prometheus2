@@ -1,0 +1,7 @@
+---
+- name: Dynamic web | Install and configure
+  hosts: all
+  become: true
+
+  roles:
+    - { role: dynamicweb, when: ansible_system == 'Linux' }
