@@ -24,7 +24,7 @@ Vagrant.configure("2") do |config|
         mkdir -p ~root/.ssh
         cp ~vagrant/.ssh/auth* ~root/.ssh
       SHELL
-      if boxconfig[:vm_name] == "prometheus"
+      if boxconfig[:vm_name] == "prometheus2"
         box.vm.provision "ansible" do |ansible|
           ansible.playbook = "ansible/playbook.yml"
           ansible.inventory_path = "ansible/hosts"

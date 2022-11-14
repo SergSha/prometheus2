@@ -9,16 +9,16 @@
     - "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
     - "{{ ansible_os_family | lower }}.yml"
 
-- include: preflight.yml
+#- include: preflight.yml
 
 - include: install.yml
-  become: true
+#  become: true
 
-- include: configure.yml
-  become: true
+#- include: configure.yml
+#  become: true
 
 - name: ensure prometheus service is started and enabled
-  become: true
+#  become: true
   systemd:
     daemon_reload: true
     name: prometheus
