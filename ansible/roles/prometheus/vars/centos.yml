@@ -1,0 +1,6 @@
+---
+# vars file for prometheus
+
+prometheus_selinux_packages:
+  - libselinux-python
+  - policycoreutils-python
