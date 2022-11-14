@@ -93,19 +93,17 @@ simply run `vagrant up`.
 <pre>[root@prometheus ~]# <b>sed -i 's/^SELINUX=.*/SELINUX=permissive/g' /etc/selinux/config</b>
 [root@prometheus ~]#</pre>
 
-<p>Установим wget:</p>
-
-<pre>[root@prometheus ~]# <b>yum install wget -y</b></pre>
+<h4>Установка Prometheus</h4>
 
 <p>Скачиваем дистрибутив prometheus:</p>
 
-<pre[root@prometheus ~]# <b>wget https://github.com/prometheus/prometheus/releases/download/v2.37.2/prometheus-2.37.2.linux-amd64.tar.gz</b></pre>
+<pre[root@prometheus ~]# <b>curl -LO https://github.com/prometheus/prometheus/releases/download/v2.37.2/prometheus-2.37.2.linux-amd64.tar.gz</b></pre>
 
 <pre>[root@prometheus ~]# <b>ls -l ./prometheus-2.37.2.linux-amd64.tar.gz</b>
 -rw-r--r--. 1 root root 83879445 Nov  4 11:32 ./prometheus-2.37.2.linux-amd64.tar.gz
 [root@prometheus ~]#</pre>
 
-<p>Распакуем скачанный архив prometheus:</p>
+<p>Распакуем скачанный архив <i>prometheus-2.37.2.linux-amd64.tar.gz</i>:</p>
 
 <pre>[root@prometheus ~]# <b>tar zxf ./prometheus-2.37.2.linux-amd64.tar.gz</b>
 [root@prometheus ~]#</pre>
@@ -150,7 +148,7 @@ drwxr-xr-x. 2 3434 3434       173 Nov  4 11:24 consoles
 
 <p>Распределяем файлы по каталогам:</p>
 
-<pre>[root@prometheus prometheus-2.37.2.linux-amd64]# <b>cp prom{etheus,tool} /usr/local/bin/</b>
+<pre>[root@prometheus prometheus-2.37.2.linux-amd64]# <b>cp -f prom{etheus,tool} /usr/local/bin/</b>
 [root@prometheus prometheus-2.37.2.linux-amd64]#</pre>
 
 <pre>[root@prometheus prometheus-2.37.2.linux-amd64]# <b>cp -r console{_libraries,s} prometheus.yml /etc/prometheus</b>
@@ -205,16 +203,153 @@ WantedBy=multi-user.target</pre>
 
 <pre>[root@prometheus prometheus-2.37.2.linux-amd64]# <b>systemctl status prometheus</b></pre>
 
+<p>Возвращаемся к домашнему директорию:</p>
 
+<pre>[root@prometheus prometheus-2.37.2.linux-amd64]# <b>cd</b>
+[root@prometheus ~]#</pre>
 
+<p>Удаляем директорий <i>prometheus-2.37.2.linux-amd64</i>:</p>
 
+<pre>[root@prometheus ~]# <b>rm -rf ./prometheus-2.37.2.linux-amd64</b></pre>
 
+<h4>Установка Grafana</h4>
 
+<p>Скачиваем дистрибутив <i>grafana</i>:</p>
 
+<pre[root@prometheus ~]# <b>curl -LO https://dl.grafana.com/oss/release/grafana-9.2.4-1.x86_64.rpm</b></pre>
 
+<pre>[root@prometheus ~]# <b>ls -l ./grafana-9.2.4-1.x86_64.rpm</b>
+-rw-r--r--. 1 root root 83879445 Nov  4 11:32 ./grafana-9.2.4-1.x86_64.rpm
+[root@prometheus ~]#</pre>
 
+<p>Устанавливаем <i>grafana</i>:</pre>
 
+<pre>[root@prometheus ~]# <b>yum install ./grafana-8.3.4-1.x86_64.rpm -y</b></pre>
 
+<p>Перечитываем конфигурацию systemd:</p>
+
+<pre>[root@prometheus ~]# <b>systemctl daemon-reload</b></pre>
+
+<p>Запускаем grafana-server сервис и включаем автозапуск:</p>
+
+<pre>[root@prometheus ~]# <b>systemctl enable grafana-server --now</b></pre>
+
+<p>Состояние запущенного grafana-server сервиса:</p>
+
+<pre>[root@prometheus ~]# <b>systemctl status grafana-server</b></pre>
+
+<p>Удаляем архив <i>grafana-9.2.4-1.x86_64.rpm</i>:</p>
+
+<pre>[root@prometheus ~]# <b>rm -rf ./grafana-9.2.4-1.x86_64.rpm</b></pre>
+
+<h4>Установка node_exporter</h4>
+
+<p>Скачиваем дистрибутив node_exporter:</p>
+
+<pre>[root@prometheus ~]# <b>curl -LO https://github.com/prometheus/node_exporter/releases/download/v1.4.0/node_exporter-1.4.0.linux-amd64.tar.gz</b></pre>
+
+<p>Распакуем скачанный архив <i>node_exporter-1.4.0.linux-amd64.tar.gz</i>:</p>
+
+<pre>[root@prometheus ~]# <b>tar -xvf ./node_exporter-1.4.0.linux-amd64.tar.gz</b></pre>
+
+<pre>[root@prometheus ~]# <b>ls -l</b>
+total 81932
+...
+drwxr-xr-x. 4 3434 3434      132 Nov  4 11:28 node_exporter-1.4.0.linux-amd64
+-rw-r--r--. 1 root root 83879445 Nov  4 11:32 node_exporter-1.4.0.linux-amd64.tar.gz
+[root@prometheus ~]#</pre>
+
+<p>За дальнейшей ненадобностью удаляем скачанный архив <i>node_exporter-1.4.0.linux-amd64.tar.gz</i>:</p>
+
+<pre>[root@prometheus ~]# <b>rm -f ./node_exporter-1.4.0.linux-amd64.tar.gz</b>
+[root@prometheus ~]#</pre>
+
+<p>Перейдём в каталог с распакованными файлами:</p>
+
+<pre>[root@prometheus ~]# <b>cd ./node_exporter-1.4.0.linux-amd64</b>
+[root@prometheus node_exporter-1.4.0.linux-amd64]#</pre>
+
+<pre>[root@prometheus node_exporter-1.4.0.linux-amd64]# <b>ls -l</b>
+[root@prometheus node_exporter-1.4.0.linux-amd64]#</pre>
+
+<p>Скопируем исполняемый файл <i>node_exporter</i> в /usr/local/bin:</p>
+
+<pre>[root@prometheus node_exporter-1.4.0.linux-amd64]# <b>cp -f ./node_exporter /usr/local/bin/</b>
+[root@prometheus node_exporter-1.4.0.linux-amd64]#</pre>
+
+<p>Создаём системного пользователя <i>node_exporter</i>, от которого будем запускать сборщика метрик:</p>
+
+<pre>[root@prometheus node_exporter-1.4.0.linux-amd64]# <b>useradd --no-create-home --shell /bin/false node_exporter</b></pre>
+
+<p>Задаем владельца для исполняемого файла:</p>
+
+<pre>[root@prometheus node_exporter-1.4.0.linux-amd64]# <b>chown -R node_exporter: /usr/local/bin/node_exporter</b>
+[root@prometheus node_exporter-1.4.0.linux-amd64]#</pre>
+
+<p>Создаем файл node_exporter.service в systemd:</p>
+
+<pre>[root@prometheus node_exporter-1.4.0.linux-amd64]# <b>chown -R node_exporter.service</b>
+[Unit]
+Description=Node Exporter Service
+Wants=network-online.target
+After=network.target
+
+[Service]
+User=node_exporter
+Group=node_exporter
+Type=simple
+ExecStart=/usr/local/bin/node_exporter
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target</pre>
+
+<p>Перечитываем конфигурацию systemd:</p>
+
+<pre>[root@prometheus node_exporter-1.4.0.linux-amd64]# <b>systemctl daemon-reload</b>
+[root@prometheus node_exporter-1.4.0.linux-amd64]#</pre>
+
+<p>Запускаем node_exporter сервис и включаем автозапуск:</p>
+
+<pre>[root@prometheus node_exporter-1.4.0.linux-amd64]# <b>systemctl enable node_exporter --now</b>
+[root@prometheus node_exporter-1.4.0.linux-amd64]#</pre>
+
+<p>Состояние запущенного node_exporter сервиса:</p>
+
+<pre>[root@prometheus node_exporter-1.4.0.linux-amd64]# <b>systemctl status node_exporter</b>
+[root@prometheus node_exporter-1.4.0.linux-amd64]#</pre>
+
+<p>Возвращаемся к домашнему директорию:</p>
+
+<pre>[root@prometheus node_exporter-1.4.0.linux-amd64]# <b>cd</b>
+[root@prometheus ~]#</pre>
+
+<p>Удаляем директорий <i>node_exporter-1.4.0.linux-amd64</i>:</p>
+
+<pre>[root@prometheus ~]# <b>rm -rf ./node_exporter-1.4.0.linux-amd64</b>
+[root@prometheus ~]#</pre>
+
+<p>Открываем веб-браузер и переходим по адресу http://<IP-адрес сервера или клиента>:9100/metrics — мы увидим метрики, собранные node_exporter:</p>
+
+<h4>Отображение метрик с node_exporter в консоли prometheus</h4>
+
+<p>Открываем конфигурационный файл <i>prometheus.yml</i>:</p>
+
+<pre>[root@prometheus ~]# <b>vi /etc/prometheus/prometheus.yml</b>
+[root@prometheus ~]#</pre>
+
+<pre>scrape_configs:
+  ...
+  - job_name: 'node_exporter_clients'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['192.168.50.10:9100']</pre>
+
+<p>Перезагружаем prometheus сервис:</p>
+
+<pre>[root@prometheus ~]# <b>systemctl restart prometheus</b>
+[root@prometheus ~]#</pre>
 
 
 
