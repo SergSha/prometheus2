@@ -171,9 +171,46 @@ drwxr-xr-x. 2 3434 3434       173 Nov  4 11:24 consoles
 <pre>[root@prometheus prometheus-2.37.2.linux-amd64]# <b>chown prometheus: /usr/local/bin/prom{etheus,tool}</b>
 [root@prometheus prometheus-2.37.2.linux-amd64]#</pre>
 
-<p>Запускаем prometheus командой:</p>
+<p>Создадим prometheus systemd сервис:</p>
 
-/usr/local/bin/prometheus --config.file /etc/prometheus/prometheus.yml --storage.tsdb.path /var/lib/prometheus/ --web.console.templates=/etc/prometheus/consoles --web.console.libraries=/etc/prometheus/console_libraries
+<pre>[root@prometheus prometheus-2.37.2.linux-amd64]# <b>vi /etc/systemd/system/prometheus.service</b>
+[Unit]
+Description=Prometheus Monitoring
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=prometheus
+Group=prometheus
+Type=simple
+ExecStart=/usr/local/bin/prometheus \
+--config.file /etc/prometheus/prometheus.yml \
+--storage.tsdb.path /var/lib/prometheus/ \
+--web.console.templates=/etc/prometheus/consoles \
+--web.console.libraries=/etc/prometheus/console_libraries
+ExecReload=/bin/kill -HUP $MAINPID
+
+[Install]
+WantedBy=multi-user.target</pre>
+
+<p>Перечитываем конфигурацию systemd:</p>
+
+<pre>[root@prometheus prometheus-2.37.2.linux-amd64]# <b>systemctl daemon-reload</b></pre>
+
+<p>Запускаем prometheus сервис и включаем автозапуск:</p>
+
+<pre>[root@prometheus prometheus-2.37.2.linux-amd64]# <b>systemctl enable prometheus --now</b></pre>
+
+<p>Состояние запущенного prometheus сервиса:</p>
+
+<pre>[root@prometheus prometheus-2.37.2.linux-amd64]# <b>systemctl status prometheus</b></pre>
+
+
+
+
+
+
+
 
 
 
