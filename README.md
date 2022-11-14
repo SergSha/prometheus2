@@ -430,6 +430,8 @@ Hint: Some lines were ellipsized, use -l to show in full.
 <pre>[root@prometheus ~]# <b>vi /etc/prometheus/prometheus.yml</b>
 [root@prometheus ~]#</pre>
 
+<p>В разделе scrape_configs добавим:</p>
+
 <pre>scrape_configs:
   ...
   - job_name: 'node_exporter_clients'
@@ -437,10 +439,113 @@ Hint: Some lines were ellipsized, use -l to show in full.
     static_configs:
       - targets: ['192.168.50.10:9100']</pre>
 
-<p>Перезагружаем prometheus сервис:</p>
+<p>Чтобы настройка вступила в действие, перезагружаем наш prometheus сервис:</p>
 
 <pre>[root@prometheus ~]# <b>systemctl restart prometheus</b>
 [root@prometheus ~]#</pre>
+
+<p>В веб-браузере переходим по адресу http://192.168.50.10:3000:</p>
+
+<img src="./screens/Screenshot from 2022-11-14 21-51-18.png" alt="Grafana" border="1" />
+
+<p>Для авторизации используем логин и пароль: admin / admin.</p>
+
+<img src="./screens/Screenshot from 2022-11-14 21-56-41.png" alt="Grafana" border="1" />
+
+<p>Система может потребовать задать новый пароль — вводим его дважды: Otus1234 / Otus1234.</p>
+
+<img src="./screens/Screenshot from 2022-11-14 21-58-31.png" alt="Grafana" border="1" />
+
+<p>Для авторизации используем логин и пароль: admin / admin.</p>
+
+<img src="./screens/Screenshot from 2022-11-14 22-05-16.png" alt="Grafana" border="1" />
+
+<p>[Configuration] - [Data sources]</p>
+
+<img src="./screens/Screenshot from 2022-11-14 22-08-05.png" alt="Grafana" border="1" />
+
+<p>[Add data source]</p>
+
+<img src="./screens/Screenshot from 2022-11-14 22-09-12.png" alt="Grafana" border="1" />
+
+<p>[Prometheus]</p>
+
+<img src="./screens/Screenshot from 2022-11-14 22-10-37.png" alt="Grafana" border="1" />
+
+<p>Спускаемся вниз до конца.</p>
+
+<img src="./screens/Screenshot from 2022-11-14 22-12-42.png" alt="Grafana" border="1" />
+
+<p>В поле URL вводим http://192.168.50.10:9090</p>
+
+<img src="./screens/Screenshot from 2022-11-14 22-21-30.png" alt="Grafana" border="1" />
+
+<p>Спускаемся вниз до конца</p>
+
+<img src="./screens/Screenshot from 2022-11-14 22-26-46.png" alt="Grafana" border="1" />
+
+<p>[Save & test]</p>
+
+<img src="./screens/Screenshot from 2022-11-14 22-29-21.png" alt="Grafana" border="1" />
+
+<p>Затем зайдём на сайт Grafana по ссылке https://grafana.com/grafana/dashboards/</p>
+
+<img src="./screens/Screenshot from 2022-11-14 22-31-57.png" alt="Grafana" border="1" />
+
+<p>Затем зайдём на сайт Grafana по ссылке https://grafana.com/grafana/dashboards/</p>
+
+<img src="./screens/Screenshot from 2022-11-14 22-31-57.png" alt="Grafana" border="1" />
+
+<p>В поле поиска вводим node exporter</p>
+
+<img src="./screens/Screenshot from 2022-11-14 22-34-23.png" alt="Grafana" border="1" />
+
+<p>Из результатов поиска выберем, например, Node Exporter Full и видим, что код 1860. Скопируем это значение или кликаем по Copy ID to Clipboard</p>
+
+<img src="./screens/Screenshot from 2022-11-14 22-39-17.png" alt="Grafana" border="1" />
+
+<p>Видим, что код 1860. Скопируем это значение или кликаем по Copy ID to Clipboard</p>
+
+<img src="./screens/Screenshot from 2022-11-14 22-40-49.png" alt="Grafana" border="1" />
+
+<p>Возвращаемся к своей вкладке и в меню [Dashboards] кликаем [+ Import]</p>
+
+<img src="./screens/Screenshot from 2022-11-14 22-43-01.png" alt="Grafana" border="1" />
+
+<p>В поле "Import via grafana.com" вводим "1860" и нажимаем [Load]</p>
+
+<img src="./screens/Screenshot from 2022-11-14 22-47-59.png" alt="Grafana" border="1" />
+
+<p>В поле "Import via grafana.com" вводим "1860" и нажимаем [Load]</p>
+
+<img src="./screens/Screenshot from 2022-11-14 22-49-25.png" alt="Grafana" border="1" />
+
+<p>Внизу в поле выбираем Prometheus</p>
+
+<img src="./screens/Screenshot from 2022-11-14 22-51-10.png" alt="Grafana" border="1" />
+
+<p>[Import]</p>
+
+<img src="./screens/Screenshot from 2022-11-14 22-53-57.png" alt="Grafana" border="1" />
+
+<p>Спустя некоторое время видим изменения.</p>
+
+<img src="./screens/Screenshot from 2022-11-14 23-08-54.png" alt="Grafana" border="1" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
