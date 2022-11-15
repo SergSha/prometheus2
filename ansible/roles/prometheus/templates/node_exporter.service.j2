@@ -1,0 +1,16 @@
+# /etc/systemd/system/node_exporter.service
+[Unit]
+Description=Node Exporter Service
+Wants=network-online.target
+After=network.target
+
+[Service]
+User=node_exporter
+Group=node_exporter
+Type=simple
+ExecStart=/usr/local/bin/node_exporter
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

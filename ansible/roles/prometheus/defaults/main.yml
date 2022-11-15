@@ -1,21 +1,32 @@
 ---
 # defaults file for prometheus
 
+# Prometheus
+prometheus_ip: 192.168.50.10
 prometheus_version: 2.37.2
-prometheus_binary_local_dir: ''
-prometheus_skip_install: false
+go_arch: amd64
 
 prometheus_config_dir: /etc/prometheus
 prometheus_db_dir: /var/lib/prometheus
-prometheus_read_only_dirs: []
 
-prometheus_web_listen_address: "0.0.0.0:9090"
-prometheus_web_external_url: ''
+prometheus_binary_local_dir: ''
+prometheus_skip_install: false
+
+
+#prometheus_read_only_dirs: []
+
+#prometheus_web_listen_address: "0.0.0.0:9090"
+#prometheus_web_external_url: ''
 # See https://github.com/prometheus/exporter-toolkit/blob/master/docs/web-configuration.md
-prometheus_web_config:
-  tls_server_config: {}
-  http_server_config: {}
-  basic_auth_users: {}
+#prometheus_web_config:
+#  tls_server_config: {}
+#  http_server_config: {}
+#  basic_auth_users: {}
 
+# Grafana
+grafana_version: 9.2.4-1
+grafana_arch: x86_64
 
-go_arch: amd64
+# Node_exporter
+node_exporter_version: 1.4.0
+node_exporter_db_dir: /home/node_exporter
