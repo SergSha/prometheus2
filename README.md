@@ -97,7 +97,7 @@ simply run `vagrant up`.
 
 <p>Скачиваем дистрибутив prometheus:</p>
 
-<pre[root@prometheus ~]# <b>curl -LO https://github.com/prometheus/prometheus/releases/download/v2.37.2/prometheus-2.37.2.linux-amd64.tar.gz</b>
+<pre>[root@prometheus ~]# <b>curl -LO https://github.com/prometheus/prometheus/releases/download/v2.37.2/prometheus-2.37.2.linux-amd64.tar.gz</b>
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
