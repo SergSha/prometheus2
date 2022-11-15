@@ -16,6 +16,7 @@ Vagrant.configure("2") do |config|
       box.vm.box = boxconfig[:box_name]
       box.vm.host_name = boxname.to_s
       box.vm.network "private_network", ip: boxconfig[:ip]
+      box.vm.network "forwarded_port", guest: 3000, host: 3000
       box.vm.provider :virtualbox do |vb|
         vb.customize ["modifyvm", :id, "--memory", boxconfig[:mem]]
         vb.customize ["modifyvm", :id, "--cpus", boxconfig[:cpus]]

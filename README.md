@@ -520,20 +520,38 @@ Hint: Some lines were ellipsized, use -l to show in full.
 
 <img src="./screens/Screenshot from 2022-11-14 23-08-54.png" alt="Grafana" border="1" />
 
+<h4>Запуск стенда "Prometheus"</h4>
 
+<p>Запустить стенд с помощью следующей команды:</p>
 
+<pre>$ git clone https://github.com/SergSha/prometheus2.git && cd ./prometheus2/ && vagrant up</pre>
 
+<p>После завершения открываем браузер и в адресной строке вводим:<br />
 
+<pre>http://192.168.50.10:3000</pre>
 
+<p>Откроется стартовая страница Grafana.</p>
 
+<p>Для авторизации используем логин и пароль: admin / admin.</p>
 
+<p>Система может потребовать задать новый пароль — вводим его дважды.</p>
 
+<p>В меню [Configuration] кликаем [Data sources].</p>
 
+<p>Нажимаем [Add data source]</p>
 
+<p>Выбираем "Prometheus"</p>
 
+<p>В поле URL вводим http://192.168.50.10:9090</p>
 
+<p>Спускаемся вниз до конца и нажимаем [Save & test]</p>
 
+<p>В меню [Dashboards] кликаем [+ Import]</p>
 
+<p>В поле "Import via grafana.com" вводим "1860" и нажимаем [Load]</p>
 
+<p>Внизу в поле выбираем "Prometheus" и нажимаем [Import].</p>
+
+<p>Должен получиться дашборд с необходимыми графиками.</p>
 
 

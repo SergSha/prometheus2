@@ -80,7 +80,7 @@
         mode: 0755
         owner: root
         group: root
-     loop:
+      loop:
         - prometheus
         - promtool
 #      notify:
@@ -89,13 +89,14 @@
     - name: Prometheus | propagate official console templates
       copy:
         src: "/tmp/prometheus-{{ prometheus_version }}.linux-{{ go_arch }}/{{ item }}/"
-        dest: "{{ prometheus_config_dir }}/{{ item }}/"
+        dest: "{{ prometheus_config_dir }}/{{ item }}"
         mode: 0644
         owner: root
         group: root
       loop:
         - console_libraries
         - consoles
+        - prometheus.yml
 #      notify:
 #        - restart prometheus
   when:
