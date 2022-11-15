@@ -83,8 +83,6 @@
       loop:
         - prometheus
         - promtool
-#      notify:
-#        - restart prometheus
 
     - name: Prometheus | propagate official console templates
       copy:
@@ -97,8 +95,6 @@
         - console_libraries
         - consoles
         - prometheus.yml
-#      notify:
-#        - restart prometheus
   when:
     - prometheus_binary_local_dir | length == 0
     - not prometheus_skip_install
@@ -116,8 +112,6 @@
   when:
     - prometheus_binary_local_dir | length > 0
     - not prometheus_skip_install
-#  notify:
-#    - restart prometheus
 
 - name: Prometheus | create prometheus systemd service unit
   template:
@@ -126,18 +120,13 @@
     owner: root
     group: root
     mode: 0644
-#  notify:
-#    - restart prometheus
 
-- name: Prometheus | 
+- name: Prometheus | edit config file /etc/prometheus/prometheus.yml
   lineinfile:
     path: /etc/prometheus/prometheus.yml
     insertafter: EOF
     line: "  - job_name: 'node_exporter_clients'\n    scrape_interval: 5s\n    static_configs:\n      - targets: ['{{ prometheus_ip }}:9100']"
-#    regexp: "^"
-#    owner: foo
     state: present
-#    create: True
 
 - name: Prometheus | ensure prometheus service is started and enabled
   systemd:
@@ -145,7 +134,6 @@
     name: prometheus
     state: restarted
     enabled: true
-
 
 #- name: Prometheus | Install SELinux dependencies
 #  package:
@@ -169,3 +157,4 @@
 #  when:
 #    - ansible_version.full is version('2.4', '>=')
 #    - ansible_selinux.status == "enabled"
+
