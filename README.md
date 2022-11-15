@@ -526,11 +526,11 @@ Hint: Some lines were ellipsized, use -l to show in full.
 
 <pre>$ git clone https://github.com/SergSha/prometheus2.git && cd ./prometheus2/ && vagrant up</pre>
 
-<p>После завершения открываем браузер и в адресной строке вводим:<br />
+<p>После завершения открываем веб-браузер и в адресной строке вводим:<br />
 
-<pre>http://192.168.50.10:3000</pre>
+<pre>localhost:3000</pre>
 
-<p>Откроется стартовая страница Grafana.</p>
+<p>Откроется стартовая страница Grafana. В случае неудачи открываем по <a href="http://192.168.50.10:3000">ссылке</a>.</p>
 
 <p>Для авторизации используем логин и пароль: admin / admin.</p>
 
