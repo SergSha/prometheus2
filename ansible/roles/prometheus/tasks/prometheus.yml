@@ -130,14 +130,11 @@
 
 - name: Prometheus | 
   lineinfile:
-    path:
-
-  lineinfile:
-    dest: /etc/prometheus/prometheus.yml
+    path: /etc/prometheus/prometheus.yml
+    insertafter: EOF
     line: "  - job_name: 'node_exporter_clients'\n    scrape_interval: 5s\n    static_configs:\n      - targets: ['{{ prometheus_ip }}:9100']"
 #    regexp: "^"
 #    owner: foo
-    insertafter: EOF
     state: present
 #    create: True
 

@@ -18,12 +18,13 @@
 
 - name: Include install prometheus
   include_tasks: prometheus.yml
-  when: '"prometheus" in ansible_hostname'
+  when: "'prometheus' in ansible_hostname"
 
 - name: Include install grafana
   include_tasks: grafana.yml
-  when: '"prometheus" in ansible_hostname'
+  when: "'prometheus' in ansible_hostname"
 
 - name: Include install node_exporter
   include_tasks: node_exporter.yml
   when: '"prometheus" in ansible_hostname'
+  when: "'servers' in group_names"
