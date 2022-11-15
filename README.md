@@ -528,7 +528,7 @@ Hint: Some lines were ellipsized, use -l to show in full.
 
 <p>После завершения открываем веб-браузер и в адресной строке вводим:<br />
 
-<pre>localhost:3000</pre>
+<pre><a href="http://localhost:3000">localhost:3000</a></pre>
 
 <p>Откроется стартовая страница Grafana. В случае неудачи открываем по <a href="http://192.168.50.10:3000">ссылке</a>.</p>
 
