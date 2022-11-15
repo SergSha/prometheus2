@@ -536,9 +536,9 @@ Hint: Some lines were ellipsized, use -l to show in full.
 
 <p>Система может потребовать задать новый пароль — вводим его дважды.</p>
 
-<p>В меню [Configuration] кликаем [Data sources].</p>
+<p>В меню [Configuration] кликаем [Data sources]</p>
 
-<p>Нажимаем [Add data source]</p>
+<p>Во вкладке "Data sources" нажимаем [Add data source]</p>
 
 <p>Выбираем "Prometheus"</p>
 
@@ -550,7 +550,7 @@ Hint: Some lines were ellipsized, use -l to show in full.
 
 <p>В поле "Import via grafana.com" вводим "1860" и нажимаем [Load]</p>
 
-<p>Внизу в поле выбираем "Prometheus" и нажимаем [Import].</p>
+<p>Внизу в поле выбираем "Prometheus" и нажимаем [Import]</p>
 
 <p>Должен получиться дашборд с необходимыми графиками.</p>
 
