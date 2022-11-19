@@ -526,7 +526,7 @@ Hint: Some lines were ellipsized, use -l to show in full.
 
 <pre>$ git clone https://github.com/SergSha/prometheus2.git && cd ./prometheus2/ && vagrant up</pre>
 
-<p>После завершения открываем веб-браузер и в адресной строке вводим:<br />
+<p>После завершения открываем веб-браузер и в адресной строке вводим:</p>
 
 <pre><a href="http://localhost:3000" target="_blank">localhost:3000</a></pre>
 
